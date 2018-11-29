@@ -1,19 +1,17 @@
 import React from 'react'
-import { Image, List } from 'semantic-ui-react'
+import { Table } from 'semantic-ui-react'
 
 const taskItem = (props) => (
-<List.Item>
-    <Image avatar src='https://cdn0.iconfinder.com/data/icons/tiny-icons-1/100/tiny-11-512.png' />
-        <List.Content>
-        <List.Header>
-            {props.task.date}
-            {props.task.title}
-            {props.task.location}
-            {props.task.time}
-            {props.task.progress}
-        </List.Header>
-    </List.Content>
-</List.Item>)
+    < Table.Row >
+        <Table.Cell>{props.task.date}</Table.Cell>
+        <Table.Cell>{props.task.title}</Table.Cell>    
+        <Table.Cell>{props.task.location}</Table.Cell>   
+        <Table.Cell>{props.task.time}</Table.Cell>   
+        <Table.Cell>{props.task.progress}</Table.Cell>   
+     </Table.Row >)
 
 
 export default taskItem
+
+    
+      

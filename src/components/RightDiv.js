@@ -6,7 +6,9 @@ const rightDiv = (props) => (
 
 <Grid.Column width={12}>
         <Segment basic>
-            <TaskList  selectedUser={props.selectedUser}/>
+        {props.selectedUser? 
+                <TaskList selectedUser={props.selectedUser}/>
+           : null }
         </Segment>
 </Grid.Column> )
 

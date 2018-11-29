@@ -7,12 +7,13 @@ import RightDiv from './components/RightDiv'
 class App extends Component {
   state ={
     users: [],
-    selectedUser: []
+    selectedUser: false
   }
 
   selectUserHandler = (user) => {
       this.setState({selectedUser: [user]})
   }
+
 
   componentDidMount(){
     fetch(`http://localhost:3000/api/v1/users`)
