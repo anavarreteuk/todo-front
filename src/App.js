@@ -52,22 +52,32 @@ class App extends Component {
     this.setState({ value: event.target.value })
   }
 
+ 
+ 
+ 
+ 
   deleteUserHandler = (user) => {
     fetch(`http://localhost:3000/api/v1/users/${user.id}`, {
-      method: 'DELETE',
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        is_active: false
+      })
     })
       .then(resp => resp.json())
-      .then(() => this.setState({
-        users: this.state.users.filter(u => u.id !== user.id)
-      }))}
-    
+      // .then((user) => (this.setState({users: [...this.state.users, user]})))
+  }
   
-  
+  showActiveUsers = () => (this.state.users.filter(user => user.is_active))
+
  
   render() {
     return (
       <Grid columns={2} >
-        <LeftDiv handleChange={this.handleChange} handleSubmit={this.handleSubmit} users={this.state.users} selectUserHandler={this.selectUserHandler} deleteUserHandler={this.deleteUserHandler} />
+        <LeftDiv handleChange={this.handleChange} handleSubmit={this.handleSubmit} users={this.showActiveUsers()} selectUserHandler={this.selectUserHandler} deleteUserHandler={this.deleteUserHandler} />
         <RightDiv users={this.state.users} selectedUser={this.state.selectedUser} />
       </Grid>
     );
