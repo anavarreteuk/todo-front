@@ -14,7 +14,7 @@ const leftDiv = (props) => (
                         </Table.HeaderCell>
                     </Table.Row>
                 </Table.Header>
-                <UserList users={props.users} selectUserHandler={props.selectUserHandler}/>
+                <UserList users={props.users} selectUserHandler={props.selectUserHandler} deleteUserHandler={props.deleteUserHandler}/>
             </Segment>
     </Grid.Column> )
 

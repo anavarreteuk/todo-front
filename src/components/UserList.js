@@ -9,7 +9,7 @@ const UserList = (props) => (
   <Table singleLine> 
     <UserListHeader/>
     <Table.Body>
-      {props.users.map(user => <UserItem key= {user.id}user={user} selectUserHandler={props.selectUserHandler}/>)}
+      {props.users.map(user => <UserItem key={user.id} user={user} selectUserHandler={props.selectUserHandler} deleteUserHandler={props.deleteUserHandler}/>)}
     </Table.Body >
   </Table>
 )
