@@ -60,7 +60,7 @@ class App extends Component {
     return (
       <Grid columns={2} >
         <LeftDiv handleChange={this.handleChange} handleSubmit= {this.handleSubmit} users = {this.state.users} selectUserHandler={this.selectUserHandler}/>
-        <RightDiv selectedUser = {this.state.selectedUser}/>
+        <RightDiv users={this.state.users} selectedUser = {this.state.selectedUser}/>
     </Grid>
     );
   }
