@@ -1,17 +1,24 @@
-import React from 'react'
-import { Grid, Segment} from 'semantic-ui-react'
+
+import React, { Component } from 'react';
+import { Grid, Segment, Button, Form } from 'semantic-ui-react'
 import UserList from './UserList'
 import NewUserInputBox from './NewUserInputBox';
+
 
 
 const leftDiv = (props) => (
     <Grid.Column width={4}>
              <Segment basic>
-                <NewUserInputBox/>
+                <Form onSubmit={this.props.handleSubmit}><Form.Field width={7}>
+                        <label>New User:</label>
+                        <input  onChange={this.props.handleChange} />
+                    </Form.Field><Button type='submit' > Submit</Button>
+                    </Form>
             </Segment>
             <Segment basic>
                 <UserList users={props.users} selectUserHandler={props.selectUserHandler}/>
             </Segment>
     </Grid.Column> )
+
 
 export default leftDiv
