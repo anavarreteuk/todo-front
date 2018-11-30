@@ -3,12 +3,13 @@ import { Grid, Segment} from 'semantic-ui-react'
 import TaskList from './TaskList'
 
 const rightDiv = (props) => (
-
 <Grid.Column width={12}>
         <Segment basic>
-        {props.selectedUser ? 
+
+                {props.selectedUser? 
+
                 <TaskList selectedUser={props.selectedUser}/>
-           : null }
+                : null }
         </Segment>
 </Grid.Column> )
 
