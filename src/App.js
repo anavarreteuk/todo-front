@@ -8,7 +8,7 @@ class App extends Component {
   state ={
     users: [],
     selectedUser: false,
-    value: {}
+    value: ''
   }
 
   selectUserHandler = (user) => {
@@ -29,6 +29,8 @@ class App extends Component {
     const username = (this.state.value)
     this.postUsername(username)}
 
+  cheat = () => this.componentDidMount()
+
       postUsername = (username) => {
         fetch('http://localhost:3000/api/v1/users', {
             method: 'POST',
@@ -40,13 +42,15 @@ class App extends Component {
               user:  {username} 
             })
           }).then(resp => resp.json())
-            .then(this.setState({...this.state.users,username}))
-            console.log(this.state)
+            .then(() =>this.cheat())
         }
       //   .then(this.setState((state, username) => ({
           //   users: state.users, username
           // })))
 
+          // .then(this.setState({...this.state.users,username}))
+
+  
 
   handleChange = (event) => {
     this.setState({ value: event.target.value })
