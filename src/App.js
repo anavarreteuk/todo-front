@@ -52,10 +52,22 @@ class App extends Component {
     this.setState({ value: event.target.value })
   }
 
+  deleteUserHandler = (user) => {
+    fetch(`http://localhost:3000/api/v1/users/${user.id}`, {
+      method: 'DELETE',
+    })
+      .then(resp => resp.json())
+      .then(() => this.setState({
+        users: this.state.users.filter(u => u.id !== user.id)
+      }))}
+    
+  
+  
+ 
   render() {
     return (
       <Grid columns={2} >
-        <LeftDiv handleChange={this.handleChange} handleSubmit={this.handleSubmit} users={this.state.users} selectUserHandler={this.selectUserHandler} />
+        <LeftDiv handleChange={this.handleChange} handleSubmit={this.handleSubmit} users={this.state.users} selectUserHandler={this.selectUserHandler} deleteUserHandler={this.deleteUserHandler} />
         <RightDiv users={this.state.users} selectedUser={this.state.selectedUser} />
       </Grid>
     );

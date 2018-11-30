@@ -1,8 +1,8 @@
 
-import React, { Component } from 'react';
+import React from 'react';
 import { Grid, Segment, Button, Form } from 'semantic-ui-react'
 import UserList from './UserList'
-import NewUserInputBox from './NewUserInputBox';
+
 
 
 
@@ -16,7 +16,7 @@ const leftDiv = (props) => (
                     </Form>
             </Segment>
             <Segment basic>
-                <UserList users={props.users} selectUserHandler={props.selectUserHandler}/>
+            <UserList users={props.users} selectUserHandler={props.selectUserHandler} deleteUserHandler={props.deleteUserHandler}/>
             </Segment>
     </Grid.Column> )
 
