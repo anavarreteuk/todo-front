@@ -8,7 +8,7 @@ class App extends Component {
   state ={
     users: [],
     selectedUser: false,
-    value: ''
+    value: {}
   }
 
   selectUserHandler = (user) => {
@@ -27,18 +27,26 @@ class App extends Component {
   handleSubmit = (event) => {
     event.preventDefault()
     const username = (this.state.value)
-    console.log(username)
-    fetch('http://localhost:3000/api/v1/users', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify({
-        user: { username }
-      })
-    }).then(resp => resp.json())
-  }
+    this.postUsername(username)}
+
+      postUsername = (username) => {
+        fetch('http://localhost:3000/api/v1/users', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+              user:  {username} 
+            })
+          }).then(resp => resp.json())
+            .then(this.setState({...this.state.users,username}))
+            console.log(this.state)
+        }
+      //   .then(this.setState((state, username) => ({
+          //   users: state.users, username
+          // })))
+
 
   handleChange = (event) => {
     this.setState({ value: event.target.value })
