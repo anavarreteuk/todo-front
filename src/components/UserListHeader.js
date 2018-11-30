@@ -7,6 +7,7 @@ const UserListHeader = (props) => (
         <Table.Header>
             <Table.Row>
                 <Table.HeaderCell>Name</Table.HeaderCell>
+                <Table.HeaderCell></Table.HeaderCell>
             </Table.Row>
         </Table.Header>
 
