@@ -9,9 +9,9 @@ import NewUserInputBox from './NewUserInputBox';
 const leftDiv = (props) => (
     <Grid.Column width={4}>
              <Segment basic>
-                <Form onSubmit={this.props.handleSubmit}><Form.Field width={7}>
+                <Form onSubmit={props.handleSubmit}><Form.Field width={7}>
                         <label>New User:</label>
-                        <input  onChange={this.props.handleChange} />
+                        <input  onChange={props.handleChange} />
                     </Form.Field><Button type='submit' > Submit</Button>
                     </Form>
             </Segment>
