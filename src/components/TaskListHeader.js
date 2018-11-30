@@ -10,8 +10,8 @@ const TaskListHeader = (props) => (
             <Table.Row>
                 <Table.HeaderCell>Date</Table.HeaderCell>
                 <Table.HeaderCell>Task</Table.HeaderCell>
-                <Table.HeaderCell>E-mail address</Table.HeaderCell>
-                <Table.HeaderCell>Premium Plan</Table.HeaderCell>
+                <Table.HeaderCell>Location</Table.HeaderCell>
+                <Table.HeaderCell>Time</Table.HeaderCell>
                 <Table.HeaderCell>Status</Table.HeaderCell>
             </Table.Row>
         </Table.Header>

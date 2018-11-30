@@ -5,52 +5,48 @@ import LeftDiv from './components/LeftDiv'
 import RightDiv from './components/RightDiv'
 
 class App extends Component {
-  state ={
+  state = {
     users: [],
     selectedUser: false,
     value: ''
   }
 
   selectUserHandler = (user) => {
-      this.setState({selectedUser: [user]})
+    this.setState({ selectedUser: [user] })
   }
 
 
-  componentDidMount(){
+  componentDidMount() {
     fetch(`http://localhost:3000/api/v1/users`)
-    .then(resp=>resp.json())
-    .then(data => {
-      data.map(user=>user.selected=false)
-      this.setState({ users: [...data] })})
+      .then(resp => resp.json())
+      .then(data => {
+        data.map(user => user.selected = false)
+        this.setState({ users: [...data] })
+      })
   }
 
   handleSubmit = (event) => {
     event.preventDefault()
     const username = (this.state.value)
-    this.postUsername(username)}
+    this.postUsernameToServerAndPage(username)
+    
+  }
 
-  cheat = () => this.componentDidMount()
+   postUsernameToServerAndPage = (username) => {
+    fetch('http://localhost:3000/api/v1/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        user: { username }
+      })
+    })
+      .then(resp => resp.json())
+      .then(user => (this.setState({ users: [...this.state.users, user] })))
+  }
 
-      postUsername = (username) => {
-        fetch('http://localhost:3000/api/v1/users', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-            },
-            body: JSON.stringify({
-              user:  {username} 
-            })
-          }).then(resp => resp.json())
-            .then(() =>this.cheat())
-        }
-      //   .then(this.setState((state, username) => ({
-          //   users: state.users, username
-          // })))
-
-          // .then(this.setState({...this.state.users,username}))
-
-  
 
   handleChange = (event) => {
     this.setState({ value: event.target.value })
@@ -59,13 +55,13 @@ class App extends Component {
   render() {
     return (
       <Grid columns={2} >
-        <LeftDiv handleChange={this.handleChange} handleSubmit= {this.handleSubmit} users = {this.state.users} selectUserHandler={this.selectUserHandler}/>
-        <RightDiv users={this.state.users} selectedUser = {this.state.selectedUser}/>
-    </Grid>
+        <LeftDiv handleChange={this.handleChange} handleSubmit={this.handleSubmit} users={this.state.users} selectUserHandler={this.selectUserHandler} />
+        <RightDiv users={this.state.users} selectedUser={this.state.selectedUser} />
+      </Grid>
     );
   }
 }
 
-  
+
 
 export default App;
