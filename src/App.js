@@ -5,31 +5,75 @@ import LeftDiv from './components/LeftDiv'
 import RightDiv from './components/RightDiv'
 
 class App extends Component {
-  state ={
+  state = {
     users: [],
-    selectedUser: false
+    selectedUser: false,
+    value: ''
   }
 
   selectUserHandler = (user) => {
-      this.setState({selectedUser: [user]})
+    this.setState({ selectedUser: [user] })
   }
 
 
-  componentDidMount(){
+  componentDidMount() {
     fetch(`http://localhost:3000/api/v1/users`)
-    .then(resp=>resp.json())
-    .then(data => {
-      data.map(user=>user.selected=false)
-      this.setState({ users: [...data] })})
+      .then(resp => resp.json())
+      .then(data => {
+        data.map(user => user.selected = false)
+        this.setState({ users: [...data] })
+      })
   }
+
+  handleSubmit = (event) => {
+    event.preventDefault()
+    const username = (this.state.value)
+    this.postUsernameToServerAndPage(username)
+    
+  }
+
+   postUsernameToServerAndPage = (username) => {
+    fetch('http://localhost:3000/api/v1/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        user: { username }
+      })
+    })
+      .then(resp => resp.json())
+      .then(user => (this.setState({ users: [...this.state.users, user] })))
+  }
+
+
+  handleChange = (event) => {
+    this.setState({ value: event.target.value })
+  }
+
+  deleteUserHandler = (user) => {
+    fetch(`http://localhost:3000/api/v1/users/${user.id}`, {
+      method: 'DELETE',
+    })
+      .then(resp => resp.json())
+      .then(() => this.setState({
+        users: this.state.users.filter(u => u.id !== user.id)
+      }))}
+    
+  
+  
+ 
   render() {
     return (
       <Grid columns={2} >
-        <LeftDiv users = {this.state.users} selectUserHandler={this.selectUserHandler}/>
-        <RightDiv selectedUser = {this.state.selectedUser}/>
-    </Grid>
+        <LeftDiv handleChange={this.handleChange} handleSubmit={this.handleSubmit} users={this.state.users} selectUserHandler={this.selectUserHandler} deleteUserHandler={this.deleteUserHandler} />
+        <RightDiv users={this.state.users} selectedUser={this.state.selectedUser} />
+      </Grid>
     );
   }
 }
+
+
 
 export default App;
