@@ -1,6 +1,5 @@
 import React from 'react'
-import { Table, CustomCalendar} from 'semantic-ui-react'
-import Calendar from 'react-calendar'
+import {Table} from 'semantic-ui-react'
 
 
 const TaskListHeader = (props) => (
