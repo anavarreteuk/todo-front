@@ -4,11 +4,11 @@ import '../App.css';
 
 const userItem = (props) => (
 <Table.Row>
-        <Table.Cell onClick={() => {props.selectUserHandler(props.user) }}>
+        <Table.Cell onClick={() => {props.selectUserFromUserListHandler(props.user) }}>
             {props.user.username}
         </Table.Cell>
         <Table.Cell>
-            <Button onClick={() => props.deleteUserHandler(props.user)} floated='right' size='mini'>
+            <Button onClick={() => props.deactivateUser(props.user)} floated='right' size='mini'>
                 X
             </Button>
         </Table.Cell>

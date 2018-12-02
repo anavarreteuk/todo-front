@@ -1,30 +1,28 @@
 import React from 'react'
 import { Table, Button, Icon, Input,Form } from 'semantic-ui-react'
 
-
-
 const AddTaskTableHeader = (props) => (
 <Table.Header>
 <Table.Row>
         <Table.HeaderCell colSpan='12'>
-        <Form>
+        <Form onSubmit={props.handleTaskFormSubmit}>
             <Form.Group widths='equal'>
-                <Form.Field
+                <Form.Field onChange={event => props.handleNewDateBoxChange(event)}
                     id='form-input-control-first-name'
                     control={Input}
-                    placeholder='Enter Date'
-                />
-                <Form.Field
+                    placeholder='Enter Date'>
+                </Form.Field>
+                <Form.Field onChange={event => props.handleNewTaskBoxChange(event)}
                     id='form-input-control-last-name'
                     control={Input}
                     placeholder='Enter  Task Title'
                 />
-                   <Form.Field
+                   <Form.Field onChange={event => props.handleNewLocationBoxChange(event)}
                     id='form-input-control-last-name'
                     control={Input}
                     placeholder='Enter Location'
                 />
-                   <Form.Field
+                   <Form.Field onChange={event => props.handleNewTimeBoxChange(event)}
                     id='form-input-control-last-name'
                     control={Input}
                     placeholder='Enter Time'
