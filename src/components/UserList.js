@@ -7,10 +7,9 @@ import UserListHeader from './UserListHeader'
 
 const UserList = (props) => (
   <Table singleLine> 
-    {/* <AddUserTableHeader/> */}
     <UserListHeader/>
     <Table.Body>
-      {props.users.map(user => <UserItem key={user.id} user={user} selectUserFromUserListHandler={props.selectUserFromUserListHandler} deactivateUser={props.deactivateUser}/>)}
+      {props.users.map(user => <UserItem key={user.id} user={user} selectUserFromUserListHandler={props.selectUserFromUserListHandler} removeUserFromGroup={props.removeUserFromGroup}/>)}
     </Table.Body >
   </Table>
 )

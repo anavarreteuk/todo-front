@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table } from 'semantic-ui-react'
+import { Table, Button } from 'semantic-ui-react'
 import AddUserTableHeader from './AddUserTableHeader';
 
 const manageUsersTable = (props) => (
@@ -24,15 +24,17 @@ const manageUsersTable = (props) => (
 
     <Table.Body>
     {props.users.map(user =>(
-      <Table.Row>
+      <Table.Row key={user.id}>
         <Table.Cell>{user.id}</Table.Cell>
         <Table.Cell>{user.email}</Table.Cell>
         <Table.Cell>{user.firstname}</Table.Cell>
         <Table.Cell>{user.lastname}</Table.Cell>
-        <Table.Cell>{user.currentcity}</Table.Cell>
-        <Table.Cell>{user.currentcountry}</Table.Cell>
+        <Table.Cell>{user.city}</Table.Cell>
+        <Table.Cell>{user.country}</Table.Cell>
         <Table.Cell>
-          <Button danger> x </Button>
+          {user.is_active?
+          <Button onClick={() => props.removeUserFromGroup(user)} > - </Button>:
+          <Button onClick={() => props.addUserToGroup(user)} primary>  + </Button>}
         </Table.Cell>
 
       </Table.Row>))
