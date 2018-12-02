@@ -7,14 +7,7 @@ import UserList from './UserList'
 const leftDiv = (props) => (
     <Grid.Column width={4}>
             <Segment basic>
-                <Table.Header>
-                    <Table.Row>
-                        <Table.HeaderCell>
-                            <Input/>
-                        </Table.HeaderCell>
-                    </Table.Row>
-                </Table.Header>
-                <UserList users={props.users} selectUserHandler={props.selectUserHandler} deleteUserHandler={props.deleteUserHandler}/>
+                <UserList users={props.users} handleNewUserInputBoxChange={props.handleNewUserInputBoxChange} selectUserFromUserListHandler={props.selectUserFromUserListHandler} handleUserFormSubmit={props.handleUserFormSubmit} deactivateUser={props.deactivateUser}/>
             </Segment>
     </Grid.Column> )
 

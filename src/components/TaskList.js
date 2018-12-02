@@ -7,10 +7,17 @@ import AddTaskTableHeader from './AddTaskTableHeader'
 
 const TaskList = (props) => (
   <Table celled selectable> 
-    <AddTaskTableHeader/>
+    <AddTaskTableHeader handleNewDateBoxChange={props.handleNewDateBoxChange}
+    handleNewTaskBoxChange={props.handleNewTaskBoxChange}
+    handleNewTimeBoxChange={props.handleNewTimeBoxChange}
+    handleNewLocationBoxChange={props.handleNewLocationBoxChange}
+    handleTaskFormSubmit={props.handleTaskFormSubmit}
+    />
     <TaskListHeader />
     <Table.Body>
-  {props.selectedUser.map(user => (user.tasks.map(task => <TaskItem key={task.id} task = {task}/>)))}
+      {props.filterActiveTasksByUser()
+        .map(task => 
+          <TaskItem deactivateTask ={props.deactivateTask} key={task.id} task = {task}/>)}
     </Table.Body >
   </Table>
 )

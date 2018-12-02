@@ -5,10 +5,18 @@ import TaskList from './TaskList'
 const rightDiv = (props) => (
 <Grid.Column width={12}>
         <Segment basic>
-
-                {props.selectedUser? 
-
-                <TaskList selectedUser={props.selectedUser}/>
+                {props.selectedUser.length>0?
+                <TaskList handleNewDateBoxChange={props.handleNewDateBoxChange}
+                handleNewTaskBoxChange={props.handleNewTaskBoxChange}
+                handleNewTimeBoxChange={props.handleNewTimeBoxChange}
+                handleNewLocationBoxChange={props.handleNewLocationBoxChange}
+                handleTaskFormSubmit={props.handleTaskFormSubmit}
+                 selectedUser={props.selectedUser}
+                 users={props.users}
+                 filterActiveTasksByUser={props.filterActiveTasksByUser}
+                 activeTasks={props.activeTasks}
+                 deactivateTask={props.deactivateTask}
+                 />
                 : null }
         </Segment>
 </Grid.Column> )
