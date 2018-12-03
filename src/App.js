@@ -98,7 +98,8 @@ export default class MenuBar extends Component {
            firstname: this.state.firstnamevalue,
            lastname: this.state.lastnamevalue,
            city: this.state.cityvalue,
-           country: this.state.countryvalue
+           country: this.state.countryvalue,
+           is_active:false
          }
       })
     }
@@ -271,6 +272,7 @@ export default class MenuBar extends Component {
       </Grid.Column> :
       <Grid columns={2} >
         <LeftDiv 
+        allusers={this.state.users}
         users={this.state.activeUsers} 
         selectUserFromUserListHandler={this.selectUserFromUserListHandler} 
         removeUserFromGroup={this.removeUserFromGroup}/>
