@@ -13,6 +13,7 @@ class AddUserTableHeader extends React.Component {
                         id='form-input-control-email'
                         control={Input}
                         placeholder='email'
+                        name='email'
                     />
                       <Form.Field onChange={event => this.props.handleNewUserFirstNameBoxChange(event)}
                         id='form-input-control-first-name'

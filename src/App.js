@@ -105,8 +105,8 @@ export default class MenuBar extends Component {
     }
     )
     .then(resp => resp.json())
-    .then(user => (this.setState({ activeUsers: [...this.state.activeUsers, user] })))
     .then(this.componentDidMount())
+    .then(user => (this.setState({ users: [...this.state.users, user] })))
   }
 
   removeUserFromGroup = (user) => {
@@ -144,6 +144,7 @@ export default class MenuBar extends Component {
       .then(result => {
         let newArray = this.state.activeUsers.filter(u => u.id !== user.id)
         this.setState({ activeUsers: newArray})
+        this.componentDidMount()
       })
   }
 
