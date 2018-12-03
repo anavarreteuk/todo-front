@@ -37,7 +37,14 @@ export default class UserSearchHeader extends Component {
       })
     }, 300)
   }
-
+   
+    findUserObj = () => {
+        let value = this.state.value
+        return this.props.allusers.find(user =>user.email === value)
+    }
+    
+ 
+      
   render() {
     const { isLoading, value, results } = this.state
 
@@ -60,7 +67,7 @@ export default class UserSearchHeader extends Component {
             </Grid>
         </Table.HeaderCell>
         <Table.HeaderCell>
-            <Button onClick={() => console.log(this.state.value)} floated='right' size='mini'>
+            <Button onClick={() => this.props.addUserToGroup(this.findUserObj(this.state.value))} floated='right' size='mini'>
                 +
             </Button>
         </Table.HeaderCell>
