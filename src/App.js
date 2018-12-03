@@ -105,6 +105,7 @@ export default class MenuBar extends Component {
     )
     .then(resp => resp.json())
     .then(user => (this.setState({ activeUsers: [...this.state.activeUsers, user] })))
+    .then(this.componentDidMount())
   }
 
   removeUserFromGroup = (user) => {
