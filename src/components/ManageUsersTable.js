@@ -31,12 +31,6 @@ const manageUsersTable = (props) => (
         <Table.Cell>{user.lastname}</Table.Cell>
         <Table.Cell>{user.city}</Table.Cell>
         <Table.Cell>{user.country}</Table.Cell>
-        <Table.Cell>
-          {user.is_active?
-          <Button onClick={() => props.removeUserFromGroup(user)} > - </Button>:
-          <Button onClick={() => props.addUserToGroup(user)} primary>  + </Button>}
-        </Table.Cell>
-
       </Table.Row>))
         }    
       </Table.Body>
