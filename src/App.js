@@ -41,7 +41,7 @@ export default class MenuBar extends Component {
         let activeUsers = this.state.users.filter(user=>user.is_active)
         this.setState({ activeUsers: activeUsers })
       }
-    )     
+    )  
 
     fetch(`https://radiant-forest-10458.herokuapp.com/api/v1/tasks`)
       .then(resp => resp.json())
@@ -53,6 +53,29 @@ export default class MenuBar extends Component {
       }
     )     
   }
+
+  componentDidUpdate(){
+      fetch(`https://radiant-forest-10458.herokuapp.com/api/v1/users`)
+        .then(resp => resp.json())
+        .then(data => {
+          data.map(user => user.selected = false)
+          this.setState({ users: [...data] })
+          let activeUsers = this.state.users.filter(user=>user.is_active)
+          this.setState({ activeUsers: activeUsers })
+        }
+      )  
+  
+      fetch(`https://radiant-forest-10458.herokuapp.com/api/v1/tasks`)
+        .then(resp => resp.json())
+        .then(data => {
+          data.map(task => task.selected = false)
+          this.setState({ tasks: [...data] })
+          let activeTasks = this.state.tasks.filter(task=>task.is_active)
+          this.setState({ activeTasks: activeTasks })
+        }
+      )  
+  }
+
 
   //USER FUNCTIONS
   handleUserFormSubmit = (event) => {
