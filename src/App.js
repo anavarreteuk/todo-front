@@ -269,12 +269,12 @@ export default class MenuBar extends Component {
               handleNewUserCountryBoxChange={this.handleNewUserCountryBoxChange} 
               handleUserFormSubmit={this.handleUserFormSubmit}
               removeUserFromGroup={this.removeUserFromGroup}
-              addUserToGroup={this.addUserToGroup} />
+              addusertogroup={this.addUserToGroup} />
             </Segment>
       </Grid.Column> :
       <Grid columns={2} >
         <LeftDiv 
-        addUserToGroup={this.addUserToGroup}
+        addusertogroup={this.addUserToGroup}
         allusers={this.state.users}
         users={this.state.activeUsers} 
         selectUserFromUserListHandler={this.selectUserFromUserListHandler} 

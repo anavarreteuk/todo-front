@@ -54,7 +54,7 @@ export default class UserSearchHeader extends Component {
         <Table.HeaderCell>
             <Grid>
               <Grid.Column width={16}>
-                <Search size= 'medium' icon='users' placeholder='Search users...'
+                <Search size= 'large' icon='users' placeholder='Search users...'
                   loading={isLoading}
                   onResultSelect={this.handleResultSelect}
                   onSearchChange={_.debounce(this.handleSearchChange, 500, { leading: true })}
@@ -67,7 +67,7 @@ export default class UserSearchHeader extends Component {
             </Grid>
         </Table.HeaderCell>
         <Table.HeaderCell>
-            <Button onClick={() => this.props.addUserToGroup(this.findUserObj(this.state.value))} floated='right' size='mini'>
+            <Button onClick={() => this.props.addusertogroup(this.findUserObj(this.state.value))} floated='right' size='mini'>
                 +
             </Button>
         </Table.HeaderCell>
