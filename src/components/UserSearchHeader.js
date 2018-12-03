@@ -18,21 +18,22 @@
 // export default UserSearchHeader
 
 import _ from 'lodash'
-import faker from 'faker'
+
 import React, { Component } from 'react'
 import { Search, Grid, Header, Segment } from 'semantic-ui-react'
 
-const source = _.times(5, () => ({
-  title: faker.company.companyName(),
-  description: faker.company.catchPhrase(),
-  image: faker.internet.avatar(),
-  price: faker.finance.amount(0, 100, 2, '$'),
-}))
 
 export default class SearchExampleStandard extends Component {
   componentWillMount() {
     this.resetComponent()
   }
+
+  source = () => this.props.users.map(user => ({
+    title: user.email,
+    description: user.firstname+" "+user.lastname,
+    price: user.city
+  }))
+
 
   resetComponent = () => this.setState({ isLoading: false, results: [], value: '' })
 
@@ -45,11 +46,11 @@ export default class SearchExampleStandard extends Component {
       if (this.state.value.length < 1) return this.resetComponent()
 
       const re = new RegExp(_.escapeRegExp(this.state.value), 'i')
-      const isMatch = result => re.test(result.title)
+      const isMatch = result => re.test(result.description)
 
       this.setState({
         isLoading: false,
-        results: _.filter(source, isMatch),
+        results: _.filter(this.source(), isMatch),
       })
     }, 300)
   }
@@ -69,14 +70,7 @@ export default class SearchExampleStandard extends Component {
             {...this.props}
           />
         </Grid.Column>
-        <Grid.Column width={10}>
-          <Segment>
-            <Header>State</Header>
-            <pre style={{ overflowX: 'auto' }}>{JSON.stringify(this.state, null, 2)}</pre>
-            <Header>Options</Header>
-            <pre style={{ overflowX: 'auto' }}>{JSON.stringify(source, null, 2)}</pre>
-          </Segment>
-        </Grid.Column>
+
       </Grid>
     )
   }
