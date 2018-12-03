@@ -140,6 +140,7 @@ export default class MenuBar extends Component {
       })
     })
       .then(resp => resp.json())
+      .then(this.componentDidMount())
       .then(result => {
         let newArray = this.state.activeUsers.filter(u => u.id !== user.id)
         this.setState({ activeUsers: newArray})
@@ -272,6 +273,7 @@ export default class MenuBar extends Component {
       </Grid.Column> :
       <Grid columns={2} >
         <LeftDiv 
+        addUserToGroup={this.addUserToGroup}
         allusers={this.state.users}
         users={this.state.activeUsers} 
         selectUserFromUserListHandler={this.selectUserFromUserListHandler} 
