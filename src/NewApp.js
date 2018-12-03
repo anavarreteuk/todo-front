@@ -8,7 +8,7 @@ import ManageUsersTable from './components/ManageUsersTable';
 
 export default class MenuBar extends Component {
   state = {
-    activeItem: 'Assignment Dashboard',
+    activeItem: 'home',
     users: [],
     selectedUser: [],
     activeUsers: [],
@@ -16,20 +16,12 @@ export default class MenuBar extends Component {
     activeTasks: [],
     //NEW USER INPUT  
     uservalue: '',
-    emailvalue:'',
-    firstnamevalue:'',
-    lastnamevalue:'',
-    cityvalue:'',
-    countryvalue:'',
     //NEW TASK INPUT
     datevalue: '',
     taskvalue: '',
     timevalue: '',
     locationvalue: ''
-
   }
-
-
 
   //Get All Users And Filter By Active User 
   componentDidMount() {
@@ -57,34 +49,18 @@ export default class MenuBar extends Component {
   //USER FUNCTIONS
   handleUserFormSubmit = (event) => {
     event.preventDefault()
-    this.postNewUserToServerAndPage()
+    const username = (this.state.uservalue)
+    this.postNewUserToServerAndPage(username)
     this.setState({
-      email: this.state.emailvalue,
-      firstname: this.state.firstnamevalue,
-      lastname: this.state.lastnamevalue,
-      city: this.state.cityvalue,
-      country: this.state.countryvalue,
+      uservalue: ''
     });
   }
 
-  handleNewUserEmailBoxChange = (event) => {
-    this.setState({ emailvalue: event.target.value })
-  }
-  handleNewUserFirstNameBoxChange = (event) => {
-    this.setState({ firstnamevalue: event.target.value })
-  }
-  handleNewUserLastNameBoxChange = (event) => {
-    this.setState({ lastnamevalue: event.target.value })
-  }
-  handleNewUserCityBoxChange = (event) => {
-    this.setState({ cityvalue: event.target.value })
+  handleNewUserInputBoxChange = (event) => {
+    this.setState({ uservalue: event.target.value })
   }
 
-  handleNewUserCountryBoxChange = (event) => {
-    this.setState({ countryvalue: event.target.value })
-  }
-
-  postNewUserToServerAndPage = () => {
+  postNewUserToServerAndPage = (username) => {
     fetch('http://localhost:3000/api/v1/users', {
       method: 'POST',
       headers: {
@@ -93,13 +69,7 @@ export default class MenuBar extends Component {
       },
       body: JSON.stringify({
  
-         user: { 
-           email: this.state.emailvalue,
-           firstname: this.state.firstnamevalue,
-           lastname: this.state.lastnamevalue,
-           city: this.state.cityvalue,
-           country: this.state.countryvalue
-         }
+         user: { username }
       })
     }
     )
@@ -107,7 +77,7 @@ export default class MenuBar extends Component {
     .then(user => (this.setState({ activeUsers: [...this.state.activeUsers, user] })))
   }
 
-  removeUserFromGroup = (user) => {
+  deactivateUser = (user) => {
     fetch(`http://localhost:3000/api/v1/users/${user.id}`, {
       method: 'PUT',
       headers: {
@@ -116,25 +86,6 @@ export default class MenuBar extends Component {
       },
       body: JSON.stringify({
         is_active: false
-      })
-    })
-      .then(resp => resp.json())
-      .then(result => {
-        let newArray = this.state.activeUsers.filter(u => u.id !== user.id)
-        this.setState({ activeUsers: newArray})
-      })
-  }
-
-
-  addUserToGroup = (user) => {
-    fetch(`http://localhost:3000/api/v1/users/${user.id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify({
-        is_active: true
       })
     })
       .then(resp => resp.json())
@@ -231,7 +182,7 @@ export default class MenuBar extends Component {
     return (
       <div>
         <Menu pointing secondary>
-          <Menu.Item name='Assignment Dashboard' active={activeItem === 'Assignment Dashboard'} onClick={this.handleItemClick} />
+          <Menu.Item name='home' active={activeItem === 'home'} onClick={this.handleItemClick} />
           <Menu.Item
             name='manage users'
             active={activeItem === 'manage users'}
@@ -254,25 +205,19 @@ export default class MenuBar extends Component {
             />
           </Menu.Menu>
         </Menu>
-      {this.state.activeItem==='manage users'?
       <Grid.Column width={16}>
             <Segment basic>
-              <ManageUsersTable users={this.state.users}
-              handleNewUserEmailBoxChange={this.handleNewUserEmailBoxChange} 
-              handleNewUserFirstNameBoxChange={this.handleNewUserFirstNameBoxChange} 
-              handleNewUserLastNameBoxChange={this.handleNewUserLastNameBoxChange} 
-              handleNewUserCityBoxChange={this.handleNewUserCityBoxChange} 
-              handleNewUserCountryBoxChange={this.handleNewUserCountryBoxChange} 
-              handleUserFormSubmit={this.handleUserFormSubmit}
-              removeUserFromGroup={this.removeUserFromGroup}
-              addUserToGroup={this.addUserToGroup} />
+              <MenuBar/>
+              <ManageUsersTable users={this.state.users}/>
             </Segment>
-      </Grid.Column> :
+      </Grid.Column> 
       <Grid columns={2} >
-        <LeftDiv 
+        <LeftDiv handleNewUserInputBoxChange={this.handleNewUserInputBoxChange} 
+        handleUserFormSubmit={this.handleUserFormSubmit} 
         users={this.state.activeUsers} 
         selectUserFromUserListHandler={this.selectUserFromUserListHandler} 
-        removeUserFromGroup={this.removeUserFromGroup}/>
+        deactivateUser={this.deactivateUser}/>
+
          <RightDiv handleNewDateBoxChange={this.handleNewDateBoxChange}
           handleNewTaskBoxChange={this.handleNewTaskBoxChange}
           handleNewTimeBoxChange={this.handleNewTimeBoxChange}
@@ -284,7 +229,7 @@ export default class MenuBar extends Component {
           handleTaskFormSubmit={this.handleTaskFormSubmit}
           deactivateTask={this.deactivateTask}/>
         />
-      </Grid>}
+      </Grid>
       </div>
     )
   }
