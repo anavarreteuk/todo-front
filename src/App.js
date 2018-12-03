@@ -33,6 +33,7 @@ export default class MenuBar extends Component {
 
   //Get All Users And Filter By Active User 
   componentDidMount() {
+    this.interval= setInterval(()=>{
     fetch(`https://radiant-forest-10458.herokuapp.com/api/v1/users`)
       .then(resp => resp.json())
       .then(data => {
@@ -51,31 +52,13 @@ export default class MenuBar extends Component {
         let activeTasks = this.state.tasks.filter(task=>task.is_active)
         this.setState({ activeTasks: activeTasks })
       }
-    )     
+    )
+    },7000)     
   }
 
-  componentDidUpdate(){
-      fetch(`https://radiant-forest-10458.herokuapp.com/api/v1/users`)
-        .then(resp => resp.json())
-        .then(data => {
-          data.map(user => user.selected = false)
-          this.setState({ users: [...data] })
-          let activeUsers = this.state.users.filter(user=>user.is_active)
-          this.setState({ activeUsers: activeUsers })
-        }
-      )  
-  
-      fetch(`https://radiant-forest-10458.herokuapp.com/api/v1/tasks`)
-        .then(resp => resp.json())
-        .then(data => {
-          data.map(task => task.selected = false)
-          this.setState({ tasks: [...data] })
-          let activeTasks = this.state.tasks.filter(task=>task.is_active)
-          this.setState({ activeTasks: activeTasks })
-        }
-      )  
+  componentWillUnmount(){
+    clearInterval(this.interval);
   }
-
 
   //USER FUNCTIONS
   handleUserFormSubmit = (event) => {
@@ -292,12 +275,12 @@ export default class MenuBar extends Component {
               handleNewUserCountryBoxChange={this.handleNewUserCountryBoxChange} 
               handleUserFormSubmit={this.handleUserFormSubmit}
               removeUserFromGroup={this.removeUserFromGroup}
-              addusertogroup={this.addUserToGroup} />
+              addUserToGroup={this.addUserToGroup} />
             </Segment>
       </Grid.Column> :
       <Grid columns={2} >
         <LeftDiv 
-        addusertogroup={this.addUserToGroup}
+        addUserToGroup={this.addUserToGroup}
         allusers={this.state.users}
         users={this.state.activeUsers} 
         selectUserFromUserListHandler={this.selectUserFromUserListHandler} 
