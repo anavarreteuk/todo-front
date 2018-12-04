@@ -10,7 +10,7 @@ const UserList = (props) => (
   <Table singleLine> 
   
     <UserListHeader/>
-    <UserSearchHeader addusertogroup={props.addUserToGroup} allusers={props.allusers} />
+    <UserSearchHeader addusertogroup={props.addusertogroup} allusers={props.allusers} />
     <Table.Body>
       {props.users.map(user => <UserItem key={user.id} user={user} selectUserFromUserListHandler={props.selectUserFromUserListHandler} removeUserFromGroup={props.removeUserFromGroup}/>)}
     </Table.Body >
