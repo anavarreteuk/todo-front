@@ -1,10 +1,20 @@
 import React from 'react'
-import { List } from 'semantic-ui-react'
 import UserItem from './UserItem'
+import { Table } from 'semantic-ui-react'
+import UserListHeader from './UserListHeader'
+import UserSearchHeader from './UserSearchHeader';
 
-const userList = (props) => (
-  <List animated verticalAlign='middle'>
-    {props.users.map(user => <UserItem key= {user.id}user={user} selectUserHandler={props.selectUserHandler}/>)}
-  </List>
+
+
+const UserList = (props) => (
+  <Table singleLine> 
+  
+    <UserListHeader/>
+    <UserSearchHeader addusertogroup={props.addusertogroup} allusers={props.allusers} />
+    <Table.Body>
+      {props.users.map(user => <UserItem key={user.id} user={user} selectUserFromUserListHandler={props.selectUserFromUserListHandler} removeUserFromGroup={props.removeUserFromGroup}/>)}
+    </Table.Body >
+  </Table>
 )
-export default userList
+export default UserList
+

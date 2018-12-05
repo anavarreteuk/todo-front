@@ -1,14 +1,18 @@
 import React from 'react'
-import { Image, List } from 'semantic-ui-react'
+import { Table, Button } from 'semantic-ui-react'
 import '../App.css';
 
 const userItem = (props) => (
-<List.Item onClick={()=>{props.selectUserHandler(props.user)}}>
-    <Image avatar src='https://cdn0.iconfinder.com/data/icons/tiny-icons-1/100/tiny-11-512.png' />
-        <List.Content>
-        <List.Header>{props.user.username}</List.Header>
-    </List.Content>
-</List.Item>)
+<Table.Row>
+        <Table.Cell onClick={() => {props.selectUserFromUserListHandler(props.user) }}>
+            {props.user.email}
+        </Table.Cell>
+        <Table.Cell>
+            <Button onClick={() => props.removeUserFromGroup(props.user)} floated='right' size='mini'>
+                --
+            </Button>
+        </Table.Cell>
+</Table.Row>)
 
 
 export default userItem
