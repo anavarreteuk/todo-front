@@ -1,5 +1,6 @@
 import React from 'react'
 import { Table, Button, Icon, Input,Form } from 'semantic-ui-react'
+import Calendar from 'react-calendar'
 
 const AddTaskTableHeader = (props) => (
 <Table.Header>
@@ -7,10 +8,11 @@ const AddTaskTableHeader = (props) => (
         <Table.HeaderCell colSpan='12'>
         <Form onSubmit={props.handleTaskFormSubmit}>
             <Form.Group widths='equal'>
-                <Form.Field onChange={event => props.handleNewDateBoxChange(event)}
+                        <Form.Field onClick={<Calendar />} onChange={event => props.handleNewDateBoxChange(event)}
                     id='form-input-control-first-name'
                     control={Input}
                     placeholder='Enter Date'>
+                            
                 </Form.Field>
                 <Form.Field onChange={event => props.handleNewTaskBoxChange(event)}
                     id='form-input-control-last-name'
