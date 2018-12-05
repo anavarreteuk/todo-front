@@ -34,7 +34,7 @@ export default class MenuBar extends Component {
   //Get All Users And Filter By Active User 
   componentDidMount() {
     this.interval= setInterval(()=>{
-    fetch(`https://radiant-forest-10458.herokuapp.com/api/v1/users`)
+      fetch(`http://localhost:3000/api/v1/users`)
       .then(resp => resp.json())
       .then(data => {
         data.map(user => user.selected = false)
@@ -44,7 +44,7 @@ export default class MenuBar extends Component {
       }
     )  
 
-    fetch(`https://radiant-forest-10458.herokuapp.com/api/v1/tasks`)
+      fetch(`http://localhost:3000/api/v1/tasks`)
       .then(resp => resp.json())
       .then(data => {
         data.map(task => task.selected = false)
@@ -91,7 +91,7 @@ export default class MenuBar extends Component {
   }
 
   postNewUserToServerAndPage = () => {
-    fetch('https://radiant-forest-10458.herokuapp.com/api/v1/users', {
+    fetch('http://localhost:3000/api/v1/users', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -116,7 +116,7 @@ export default class MenuBar extends Component {
   }
 
   removeUserFromGroup = (user) => {
-    fetch(`https://radiant-forest-10458.herokuapp.com/api/v1/users/${user.id}`, {
+    fetch(`http://localhost:3000/api/v1/users/${user.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -135,7 +135,7 @@ export default class MenuBar extends Component {
 
 
   addUserToGroup = (user) => {
-    fetch(`https://radiant-forest-10458.herokuapp.com/api/v1/users/${user.id}`, {
+    fetch(`http://localhost:3000/api/v1/users/${user.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -178,7 +178,7 @@ export default class MenuBar extends Component {
   }
 
   postNewTaskToServerAndPage = () => {
-    fetch('https://radiant-forest-10458.herokuapp.com/api/v1/tasks', {
+    fetch('http://localhost:3000/api/v1/tasks', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -197,7 +197,7 @@ export default class MenuBar extends Component {
   }
 
   deactivateTask = (task) => {
-    fetch(`https://radiant-forest-10458.herokuapp.com/api/v1/tasks/${task.id}`, {
+     fetch(`http://localhost:3000/api/v1/tasks/${task.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
