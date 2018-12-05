@@ -105,7 +105,8 @@ export default class MenuBar extends Component {
            lastname: this.state.lastnamevalue,
            city: this.state.cityvalue,
            country: this.state.countryvalue,
-           is_active:false
+           is_active:false,
+           password: 'password'
          }
       })
     }
